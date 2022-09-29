@@ -4,7 +4,7 @@ cp ./.env.example ./.env
 ```
 Then add credentials to the RDS instances.
 
-## Install dbt
+## Install dbt
 ```sh
 brew install dbt-postgres
 ```
