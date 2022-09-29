@@ -1,4 +1,5 @@
 test-data/**
+.env
 
 terraform.tfstate
 terraform.tfstate.backup
