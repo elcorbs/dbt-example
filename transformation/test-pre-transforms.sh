@@ -17,4 +17,3 @@ docker run -it \
     --env DBT_ENV_SECRET_PASSWORD=$password \
     ghcr.io/dbt-labs/dbt-postgres \
     test --select source:*
-

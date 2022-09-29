@@ -1,0 +1,30 @@
+rds_pg_case_studies:
+  target: "{{ env_var('DBT_TARGET', 'not-prod') }}"
+  outputs:
+    not-prod:
+      type: postgres
+      host: rds-dbt-transformations.cdgby7ohhzqb.eu-west-2.rds.amazonaws.com
+      port: 5432
+      dbname: case_test_data
+      schema: public
+      threads: 1
+      user: "{{ env_var('DBT_USER') }}"
+      password: "{{ env_var('DBT_ENV_SECRET_PASSWORD') }}"
+    testing-not-prod:
+      type: postgres
+      host: rds-dbt-transformations.cdgby7ohhzqb.eu-west-2.rds.amazonaws.com
+      port: 5432
+      dbname: case_test_data
+      schema: testing_not_prod
+      threads: 1
+      user: "{{ env_var('DBT_USER') }}"
+      password: "{{ env_var('DBT_ENV_SECRET_PASSWORD') }}"
+    prod:
+      type: postgres
+      host: rds-dbt-transformations.cdgby7ohhzqb.eu-west-2.rds.amazonaws.com
+      port: 5432
+      dbname: case_test_data
+      schema: public
+      threads: 1
+      user: "{{ env_var('DBT_USER') }}"
+      password: "{{ env_var('DBT_ENV_SECRET_PASSWORD') }}"
