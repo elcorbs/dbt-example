@@ -1,6 +1,6 @@
-## Add a profile
+## Create dotenv file
 ```sh
-cp ./profiles/profiles.example ./profiles/profiles.yml
+cp ./.env.example ./.env
 ```
 Then add credentials to the RDS instances.
 
@@ -13,8 +13,7 @@ brew install dbt-postgres
 
 ### Using docker
 ```sh
-chmod +x ./run-dbt-with-docker.sh
-./run-dbt-with-docker.sh
+./run-transformations-not-prod.sh
 ```
 
 ### Using cli (installed via homebrew)
@@ -26,5 +25,5 @@ dbt run --profiles-dir ./profiles
 ## Run tests
 
 ```sh
-dbt test --profiles-dir ./profiles
+./run-tests.sh
 ```
