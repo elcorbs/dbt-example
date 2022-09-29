@@ -4,6 +4,6 @@ select
     "reference",
     "deadline",
     "DateReceived"
-from case_data
+from {{ source('decs_raw', 'case_data') }}
 where
     "event" = 'CASE_CREATED' or "event" = 'CASE_COMPLETED'

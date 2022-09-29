@@ -31,15 +31,15 @@ resource "aws_security_group_rule" "access_pg_from_home" {
   security_group_id = aws_security_group.rds.id
 }
 
-resource "aws_db_instance" "default" {
+resource "aws_db_instance" "source" {
   allocated_storage    = 10
-  db_name              = "case_test_data"
+  db_name              = "decs_raw"
   engine               = "postgres"
-  engine_version       = "13.7"
+  engine_version       = "14.1"
   instance_class       = "db.t3.micro"
   username             = "emma"
   password             = "mypasswordypassword"
-  parameter_group_name = "default.postgres13"
+  parameter_group_name = "default.postgres14"
   skip_final_snapshot  = true
   identifier = local.app_name
   vpc_security_group_ids = [aws_security_group.rds.id]
@@ -49,17 +49,26 @@ resource "aws_db_instance" "default" {
   backup_retention_period = 7
 }
 
-// Read replica of source db
+
+
 resource "aws_db_instance" "target" {
-  replicate_source_db    = aws_db_instance.default.identifier
+  allocated_storage    = 10
+  db_name              = "decs_plotly_target"
+  engine               = "postgres"
+  engine_version       = "14.1"
   instance_class       = "db.t3.micro"
-  parameter_group_name = "default.postgres13"
+  username             = "emma"
+  password             = "mypasswordypassword"
+  parameter_group_name = "default.postgres14"
   skip_final_snapshot  = true
   identifier = "${local.app_name}-plotly-target"
   vpc_security_group_ids = [aws_security_group.rds.id]
+  db_subnet_group_name = aws_db_subnet_group.default.name
   multi_az = false
   publicly_accessible = true
+  backup_retention_period = 7
 }
+
 
 resource "aws_iam_role" "rds" {
     name = local.app_name
