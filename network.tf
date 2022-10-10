@@ -15,6 +15,12 @@ resource "aws_internet_gateway" "gw" {
   }
 }
 
+resource "aws_route" "route" {
+  route_table_id         = aws_vpc.main.main_route_table_id
+  destination_cidr_block = "0.0.0.0/0"
+  gateway_id             = aws_internet_gateway.gw.id
+}
+
 resource "aws_subnet" "one" {
   vpc_id            = aws_vpc.main.id
   cidr_block        = "10.0.1.0/28"
@@ -34,16 +40,3 @@ resource "aws_subnet" "two" {
     Name = "${local.app_name}-main"
   }
 }
-
-# data "aws_route_table" "selected" {
-#   subnet_id = aws_subnet.one.id
-#   depends_on = [
-#     aws_subnet.one
-#   ]
-# }
-
-# resource "aws_route" "route" {
-#   route_table_id            = data.aws_route_table.selected.id
-#   destination_cidr_block    = "0.0.0.0/0"
-#   vpc_peering_connection_id = aws_internet_gateway.gw.id
-# }
