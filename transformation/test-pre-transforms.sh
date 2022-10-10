@@ -14,6 +14,7 @@ docker run -it \
     --mount type=bind,source=/Users/emmacorbett/Documents/work-projects/home-office/dbt-proto/transformation/profiles,target=/root/.dbt/ \
     --env DBT_TARGET=$environment \
     --env DBT_USER=$username \
+    --env DBT_HOST=$target_hostname \
     --env DBT_ENV_SECRET_PASSWORD=$password \
     ghcr.io/dbt-labs/dbt-postgres \
     test --select source:*

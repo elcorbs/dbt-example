@@ -3,7 +3,7 @@ rds_pg_case_studies:
   outputs:
     not-prod:
       type: postgres
-      host: rds-dbt-transformations.cdgby7ohhzqb.eu-west-2.rds.amazonaws.com
+      host: "{{ env_var('DBT_HOST') }}"
       port: 5432
       dbname: case_test_data
       schema: public
@@ -12,7 +12,7 @@ rds_pg_case_studies:
       password: "{{ env_var('DBT_ENV_SECRET_PASSWORD') }}"
     testing-not-prod:
       type: postgres
-      host: rds-dbt-transformations.cdgby7ohhzqb.eu-west-2.rds.amazonaws.com
+      host: "{{ env_var('DBT_HOST') }}"
       port: 5432
       dbname: case_test_data
       schema: testing_not_prod
@@ -21,7 +21,7 @@ rds_pg_case_studies:
       password: "{{ env_var('DBT_ENV_SECRET_PASSWORD') }}"
     prod:
       type: postgres
-      host: rds-dbt-transformations.cdgby7ohhzqb.eu-west-2.rds.amazonaws.com
+      host: "{{ env_var('DBT_HOST') }}"
       port: 5432
       dbname: case_test_data
       schema: public
