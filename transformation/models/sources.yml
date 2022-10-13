@@ -2,7 +2,6 @@ version: 2
 
 sources:
   - name: decs_raw
-    database: case_test_data
     schema: public
     description: Raw decs data
     tables:

@@ -5,7 +5,7 @@ rds_pg_case_studies:
       type: postgres
       host: "{{ env_var('DBT_HOST') }}"
       port: 5432
-      dbname: case_test_data
+      dbname: "{{ env_var('DBT_DB_NAME') }}"
       schema: public
       threads: 1
       user: "{{ env_var('DBT_USER') }}"
@@ -14,7 +14,7 @@ rds_pg_case_studies:
       type: postgres
       host: "{{ env_var('DBT_HOST') }}"
       port: 5432
-      dbname: case_test_data
+      dbname: "{{ env_var('DBT_DB_NAME') }}"
       schema: testing_not_prod
       threads: 1
       user: "{{ env_var('DBT_USER') }}"
@@ -23,7 +23,7 @@ rds_pg_case_studies:
       type: postgres
       host: "{{ env_var('DBT_HOST') }}"
       port: 5432
-      dbname: case_test_data
+      dbname: "{{ env_var('DBT_DB_NAME') }}"
       schema: public
       threads: 1
       user: "{{ env_var('DBT_USER') }}"
