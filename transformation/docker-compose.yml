@@ -1,0 +1,35 @@
+services:
+  transform:
+    container_name: transform-case-data
+    image: ghcr.io/dbt-labs/dbt-postgres:1.2.latest 
+    env_file: ../.env
+    depends_on:
+      test-source-data-pre-transform:
+        condition: service_completed_successfully
+    command: run
+    volumes:
+      - /Users/emmacorbett/Documents/work-projects/home-office/dbt-proto/transformation:/usr/app/dbt
+      - /Users/emmacorbett/Documents/work-projects/home-office/dbt-proto/transformation/profiles:/root/.dbt/
+  test-source-data-pre-transform:
+    container_name: test-source-data-pre-transform
+    env_file: ../.env
+    image: ghcr.io/dbt-labs/dbt-postgres:1.2.latest 
+    command: "test --select source:*"
+    volumes:
+      - /Users/emmacorbett/Documents/work-projects/home-office/dbt-proto/transformation:/usr/app/dbt
+      - /Users/emmacorbett/Documents/work-projects/home-office/dbt-proto/transformation/profiles:/root/.dbt/
+  test-transforms:
+    container_name: test-transforms
+    env_file: ../.env
+    image: ghcr.io/dbt-labs/dbt-postgres:1.2.latest
+    environment:
+      - DBT_TARGET=testing-not-prod
+    volumes:
+      - /Users/emmacorbett/Documents/work-projects/home-office/dbt-proto/transformation:/usr/app/dbt
+      - /Users/emmacorbett/Documents/work-projects/home-office/dbt-proto/transformation/profiles:/root/.dbt/
+    entrypoint: bash -c "dbt run --full-refresh && dbt test"
+
+
+
+
+
